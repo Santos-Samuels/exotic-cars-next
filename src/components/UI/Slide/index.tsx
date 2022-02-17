@@ -3,7 +3,7 @@ import Button from "../Button";
 import SlideCarItem from "../SlideCarItem";
 import Title from "../Title";
 import { titleSize } from "../Title/styles";
-import { ColorContainer, Container, StyledImage, StyledMain } from "./styles";
+import { BackButton, ColorContainer, Container, StyledImage, StyledMain } from "./styles";
 import data from "@shared/services/cars.json";
 import { ICarImage } from "@shared/interfaces";
 import { updateCarouselItems } from "@shared/utils/updateCarouselItems";
@@ -12,35 +12,30 @@ import { useRouter } from "next/router";
 const Slide: React.FC = () => {
   const router = useRouter();
   const car = data.cars.find((car) => car.id.toString() === router.query.id);
-  const [windowWidth, setWindowWidth] = useState(0);
   const [selectedImage, setSelectedImage] = useState<ICarImage>(car!.images[0]);
-  const [carouselItems, setCarouselItems] = useState<ICarImage[]>(updateCarouselItems(car!.images, selectedImage));
+  const [carouselItems, setCarouselItems] = useState<ICarImage[]>(
+    updateCarouselItems(car!.images, selectedImage)
+  );
 
   const slideHendler = async (imageId: number) => {
     await setSelectedImage(car!.images.find((image) => image.id === imageId)!);
-    const updatedList = updateCarouselItems(car!.images, selectedImage)
-    setCarouselItems(updatedList)
+    const updatedList = updateCarouselItems(car!.images, selectedImage);
+    setCarouselItems(updatedList);
   };
-
-  useEffect(() => {
-    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
-    return () =>
-      window.removeEventListener("resize", () =>
-        setWindowWidth(window.innerWidth)
-      );
-  }, []);
 
   return (
     <>
       <StyledMain>
-        <Button clickHandler={() => router.back()}>
-          <span className="material-icons" style={{ marginRight: "5px" }}>
-            arrow_back
-          </span>
-          Back to catalog
-        </Button>
+        <BackButton>
+          <Button clickHandler={() => router.back()}>
+            <span className="material-icons" style={{ marginRight: "5px" }}>
+              arrow_back
+            </span>
+            Back to catalog
+          </Button>
+        </BackButton>
 
-        {windowWidth > 900 && <StyledImage src={selectedImage.url} alt="" />}
+        <StyledImage src={selectedImage.url} alt="" />
 
         <ColorContainer>
           <Title bold size={titleSize.xl}>
@@ -51,8 +46,6 @@ const Slide: React.FC = () => {
           </Title>
         </ColorContainer>
       </StyledMain>
-
-      {windowWidth <= 900 && <StyledImage src={selectedImage.url} alt="" />}
 
       <Button fill centered width="150px" clickHandler={() => {}}>
         Buy now

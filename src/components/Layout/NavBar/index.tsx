@@ -8,6 +8,7 @@ import {
   SearchButton,
   InputDataContainer,
   FilterContent,
+  AuthContainer,
 } from "./styles";
 
 const NavBar: React.FC = () => {
@@ -46,10 +47,10 @@ const NavBar: React.FC = () => {
         <SearchButton className="material-icons">search</SearchButton>
       </FilterContainer>
 
-      <section>
+      <AuthContainer>
         <AuthButton>Sign up</AuthButton>
         <AuthButton outline>Sign in</AuthButton>
-      </section>
+      </AuthContainer>
     </StyledNav>
   );
 };

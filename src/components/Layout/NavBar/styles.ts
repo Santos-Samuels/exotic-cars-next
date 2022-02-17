@@ -7,10 +7,19 @@ export const StyledNav = styled.nav`
   box-shadow: 0 10px 30px ${colors.shadow};
   width: 100%;
   z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 30% 1fr;
+  grid-template-areas:
+    "logo auth"
+    "filter filter";
+
+  @media (min-width: 900px) {
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   @media (min-width: 900px) {
     padding: 15px 50px;
@@ -24,6 +33,7 @@ export const StyledNav = styled.nav`
 export const Logo = styled.div`
   text-transform: uppercase;
   margin-right: 10px;
+  grid-area: logo;
 
   & strong {
     font-weight: 500;
@@ -32,15 +42,15 @@ export const Logo = styled.div`
   }
 `;
 
-export const AuthButton = styled.button<{outline?: boolean}>`
-  border: ${props => props.outline ? `solid 2px ${colors.auth}` : 'none'};
+export const AuthButton = styled.button<{ outline?: boolean }>`
+  border: ${(props) => (props.outline ? `solid 2px ${colors.auth}` : "none")};
   border-radius: 10px;
   padding: 5px 10px;
   color: ${colors.auth};
   background-color: ${colors.backgroud};
   font-weight: 600;
   margin-left: 8px;
-  transition: transform .2s;
+  transition: transform 0.2s;
 
   &:hover {
     transform: scale(1.1);
@@ -53,25 +63,23 @@ export const FilterContainer = styled.div`
   padding: 3px 3px 5px 20px;
   display: flex;
   align-items: center;
-  margin: 10px 0;
+  margin: 15px 5px 0;
+  grid-area: filter;
+  justify-self: center;
 
   @media (min-width: 930px) {
     justify-content: center;
     flex-wrap: wrap;
     margin: 0;
   }
-
-  @media (min-width: 710px) {
-    margin: 0;
-  }
-`
+`;
 
 export const FilterContent = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-`
+`;
 
 export const Input = styled.div`
   display: flex;
@@ -89,13 +97,13 @@ export const Input = styled.div`
     color: ${colors.inputText};
     outline: 0;
   }
-`
+`;
 
 export const InputDataContainer = styled.div`
   margin: 0 15px;
   display: flex;
   align-items: center;
-`
+`;
 
 export const SearchButton = styled.span`
   background-color: ${colors.backgroud};
@@ -104,4 +112,11 @@ export const SearchButton = styled.span`
   box-shadow: 0px 3px 15px #00000014;
   color: ${colors.auth};
   cursor: pointer;
-`
+`;
+
+export const AuthContainer = styled.section`
+  grid-area: auth;
+  justify-self: end;
+  display: flex;
+  flex-wrap: nowrap;
+`;
