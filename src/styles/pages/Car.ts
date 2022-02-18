@@ -5,11 +5,6 @@ export const InfoContainer = styled.section`
   flex-direction: row;
   align-items: center;
   margin-bottom: 20px;
-
-  & img {
-    height: 110px;
-    margin-right: 20px;
-  }
 `
 
 export const InfoContent = styled.section<{color: string}>`

@@ -18,3 +18,9 @@ export interface ICar {
 export interface ICarList {
     cars: ICar[];
 }
+
+export interface ISlide {
+  previousIndex: number
+  currentIndex: number
+  nextIndex: number
+}

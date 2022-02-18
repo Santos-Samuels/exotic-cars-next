@@ -8,16 +8,11 @@ export const Container = styled.article<{isSelected: boolean}>`
   padding: 15px 10px;
   margin: 20px;
   transition: transform .5s;
-  cursor: pointer;
   width: 70px;
   ${props => props.isSelected ? 'transform: scale(1.2);' : ''}
 
   & img {
     width: 80px;
-  }
-
-  &:hover {
-    transform: scale(1.2);
   }
 
   @media (min-width: 1300px) {

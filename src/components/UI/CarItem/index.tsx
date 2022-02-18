@@ -2,6 +2,8 @@ import { Container, PriceContent } from "./styles";
 import { ICar } from "@shared/interfaces";
 import { colors } from "@shared/GlobalStyles/colors";
 import { useRouter } from "next/router";
+import { ImageContainer } from "@components/index";
+import Image from "next/image";
 
 interface IProps {
   car: ICar;
@@ -17,7 +19,16 @@ const CarItem: React.FC<IProps> = ({ car }) => {
         <p>{car.model}</p>
       </div>
 
-      <img src={car.image} alt={car.beand} />
+      {/* <img src={car.image} alt={car.beand} /> */}
+      <ImageContainer width="200px" height="200px">
+          <Image
+            loader={() => car.image}
+            src={car.image}
+            alt={car.beand + " logo"}
+            layout="fill"
+            objectFit="contain"
+          />
+        </ImageContainer>
 
       <PriceContent color={car.status === 'in stock' ? colors.success : colors.assent}>
         <strong>$</strong>

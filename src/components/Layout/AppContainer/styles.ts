@@ -6,7 +6,7 @@ export const StyledDiv = styled.div<{styledBackgroung: boolean}>`
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  background: ${props => props.styledBackgroung ? 'transparent linear-gradient(125deg, #FFFFFF 0%, #D8D7D7 100%) 0% 0% no-repeat padding-box' : colors.backgroud};
+  background: ${({ styledBackgroung }) => styledBackgroung ? 'transparent linear-gradient(125deg, #FFFFFF 0%, #D8D7D7 100%) 0% 0% no-repeat padding-box' : colors.backgroud};
 `
 
 export const Container = styled.div`

@@ -1,4 +1,5 @@
 import AppContainer from "./Layout/AppContainer";
+import ImageContainer from "./Layout/ImageContainer";
 import NavBar from "./Layout/NavBar";
 import Button from "./UI/Button";
 import CarList from "./UI/CarList";
@@ -11,5 +12,6 @@ export {
   CarList,
   Slide,
   Button,
-  Title
+  Title,
+  ImageContainer
 }

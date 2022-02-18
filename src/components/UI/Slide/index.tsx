@@ -3,25 +3,29 @@ import Button from "../Button";
 import SlideCarItem from "../SlideCarItem";
 import Title from "../Title";
 import { titleSize } from "../Title/styles";
-import { BackButton, ColorContainer, Container, StyledImage, StyledMain } from "./styles";
+import {
+  BackButton,
+  ColorContainer,
+  Container,
+  StyledImage,
+  StyledMain,
+} from "./styles";
 import data from "@shared/services/cars.json";
 import { ICarImage } from "@shared/interfaces";
-import { updateCarouselItems } from "@shared/utils/updateCarouselItems";
 import { useRouter } from "next/router";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
 
 const Slide: React.FC = () => {
   const router = useRouter();
   const car = data.cars.find((car) => car.id.toString() === router.query.id);
   const [selectedImage, setSelectedImage] = useState<ICarImage>(car!.images[0]);
-  const [carouselItems, setCarouselItems] = useState<ICarImage[]>(
-    updateCarouselItems(car!.images, selectedImage)
-  );
-
-  const slideHendler = async (imageId: number) => {
-    await setSelectedImage(car!.images.find((image) => image.id === imageId)!);
-    const updatedList = updateCarouselItems(car!.images, selectedImage);
-    setCarouselItems(updatedList);
+  
+  const slideHendler = (index: number) => {
+    const updatedItem = car!.images[index]
+    setSelectedImage(updatedItem)
   };
+
 
   return (
     <>
@@ -55,14 +59,25 @@ const Slide: React.FC = () => {
       </Button>
 
       <Container>
-        {carouselItems.map((image) => (
-          <SlideCarItem
-            image={image.url}
-            imageId={image.id}
-            isSelected={image.id === selectedImage.id}
-            slideHandler={slideHendler}
-          />
+      <Swiper
+        watchSlidesProgress={true}
+        slidesPerView={3}
+        className="mySwiper"
+        loop={true}
+        initialSlide={0}
+        centeredSlides={true}
+        onSlideChange={e => slideHendler(e.realIndex)}
+      >
+        {car!.images.map((image) => (
+          <SwiperSlide>
+            <SlideCarItem
+              image={image.url}
+              imageId={image.id}
+              isSelected={image.id === selectedImage.id}
+            />
+          </SwiperSlide>
         ))}
+      </Swiper>
       </Container>
     </>
   );

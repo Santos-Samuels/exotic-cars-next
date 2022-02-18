@@ -20,10 +20,6 @@ export const Container = styled.article`
     font-weight: 300;
   }
 
-  & img {
-    width: 200px;
-  }
-
   &:hover {
     transform: scale(1.1);
   }
