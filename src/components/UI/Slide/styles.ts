@@ -5,7 +5,7 @@ export const Container = styled.article`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  max-width: 90%;
+  max-width: 100%;
   margin: 25px auto 0;
 `;
 

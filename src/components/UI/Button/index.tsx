@@ -5,6 +5,7 @@ interface IProps {
   centered?: boolean;
   width?: string;
   clickHandler: () => void;
+  hideOnMobile?: boolean;
 }
 
 const Button: React.FC<IProps> = (props) => {
@@ -14,6 +15,7 @@ const Button: React.FC<IProps> = (props) => {
       fill={props.fill ? props.fill : false}
       centered={props.centered ? props.centered : false}
       width={props.width ? props.width : ""}
+      hideOnMobile={props.hideOnMobile ? props.hideOnMobile : false}
     >
       <Content>{props.children}</Content>
     </StyledButton>
